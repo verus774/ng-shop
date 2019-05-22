@@ -20,4 +20,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
   }
 
+  onBuy() {
+    console.log('product was added');
+  }
 }
