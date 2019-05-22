@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Categories} from '../models/categories.enum';
+import {Categories} from '../../models/categories.enum';
 
 @Component({
   selector: 'app-product',
