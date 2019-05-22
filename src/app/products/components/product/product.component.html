@@ -1,20 +1,20 @@
 <div>
-  <p>Name: {{ name }}</p>
-  <p>Description: {{ description }}</p>
-  <p>Price: {{ price }}$</p>
+  <p>Name: {{ product.name }}</p>
+  <p>Description: {{ product.description }}</p>
+  <p>Price: {{ product.price }}$</p>
 
-  <p [ngSwitch]="isAvailable">
+  <p [ngSwitch]="product.isAvailable">
     Availability:
     <span *ngSwitchCase="true">available</span>
     <span *ngSwitchDefault>not available</span>
   </p>
 
   <p>Tags:</p>
-  <ul *ngFor="let tag of tags">
+  <ul *ngFor="let tag of product.tags">
     <li>{{ tag }}</li>
   </ul>
 
-  <p>Category: {{ category }}</p>
+  <p>Category: {{ product.category }}</p>
 
   <button (click)="onBuy()">Buy</button>
 </div>

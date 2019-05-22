@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Categories} from '../../models/categories.enum';
+
+import {CategoryModel} from '../../models/category.model';
+import {ProductModel} from '../../models/product.model';
 
 @Component({
   selector: 'app-product',
@@ -7,12 +9,15 @@ import {Categories} from '../../models/categories.enum';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  name = 'Product 1';
-  description = 'some product description';
-  price = 100;
-  isAvailable = false;
-  tags: string[] = ['tag1', 'tag2', 'tag3'];
-  category: Categories = Categories.ebooks;
+  product = new ProductModel(
+    1,
+    'Product 1',
+    'some product description',
+    CategoryModel.ebooks,
+    100,
+    false,
+    ['tag1', 'tag2', 'tag3'],
+  );
 
   constructor() {
   }
