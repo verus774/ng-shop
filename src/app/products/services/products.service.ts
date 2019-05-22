@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 
 import {Observable, of} from 'rxjs';
 
-import {ProductModel} from './models/product.model';
-import {CategoryModel} from './models/category.model';
+import {ProductModel} from '../models/product.model';
+import {CategoryModel} from '../models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ProductsService {
       'some product description',
       CategoryModel.ebooks,
       100,
-      false,
+      true,
       ['tag1', 'tag2', 'tag3']
     ),
     new ProductModel(
@@ -25,7 +25,7 @@ export class ProductsService {
       'some product description',
       CategoryModel.laptops,
       200,
-      true,
+      false,
       ['tag1', 'tag2', 'tag3']
     ),
     new ProductModel(
@@ -34,13 +34,10 @@ export class ProductsService {
       'some product description',
       CategoryModel.mobile,
       500,
-      false,
+      true,
       ['tag1', 'tag2', 'tag3']
     )
   ];
-
-  constructor() {
-  }
 
   getProducts(): Observable<ProductModel[]> {
     return of(this.products);

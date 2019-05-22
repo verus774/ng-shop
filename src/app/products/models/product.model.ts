@@ -8,10 +8,9 @@ export class ProductModel implements IProductModel {
     public description: string,
     public category: CategoryModel,
     public price: number,
-    public isAvailable?: boolean,
+    public isAvailable: boolean,
     public tags?: string[],
   ) {
-    this.isAvailable = isAvailable || true;
     this.tags = tags || [];
   }
 }

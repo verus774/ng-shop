@@ -1,4 +1,7 @@
+<h3>Products</h3>
+
 <app-product
   *ngFor="let product of products$ | async"
   [product]="product"
+  (buyProduct)="onBuyProduct($event)"
 ></app-product>
