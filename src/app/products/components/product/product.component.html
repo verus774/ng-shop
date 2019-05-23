@@ -1,4 +1,4 @@
-<div>
+<div class="product">
   <p>Category: {{ product.category }}</p>
   <p>Name: {{ product.name }}</p>
   <p>Description: {{ product.description }}</p>
@@ -6,10 +6,11 @@
 
   <p>Availability: {{ product.isAvailable ? 'not' : '' }} available</p>
 
-  <p>Tags:</p>
-  <ul *ngFor="let tag of product.tags">
-    <li>{{ tag }}</li>
-  </ul>
+  <p>Tags:
+    <span *ngFor="let tag of product.tags" class="tag">
+    {{ tag }}
+    </span>
+  </p>
 
-  <button *ngIf="product.isAvailable" (click)="onBuyProduct(product)">Buy</button>
+  <button *ngIf="product.isAvailable" (click)="onBuyProduct(product)" class="buy-btn">Buy</button>
 </div>

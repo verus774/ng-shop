@@ -1,5 +1,7 @@
+<h3>Cart</h3>
+
 <div *ngIf="products.length; else emptyCart">
-  <h3>Cart</h3>
+  <h4>Total: {{ products.length }} products</h4>
 
   <ul>
     <li *ngFor="let product of products">
@@ -9,5 +11,5 @@
 </div>
 
 <ng-template #emptyCart>
-  <h3>Cart is empty, please add products</h3>
+  <h4>Cart is empty, please add products</h4>
 </ng-template>
