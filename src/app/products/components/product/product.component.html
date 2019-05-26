@@ -12,5 +12,5 @@
     </span>
   </p>
 
-  <button *ngIf="product.isAvailable" (click)="onBuyProduct(product)" class="buy-btn">Buy</button>
+  <button [disabled]="!product.isAvailable" (click)="onBuyProduct(product)" class="buy-btn">Buy</button>
 </div>

@@ -26,3 +26,7 @@ p {
   text-transform: uppercase;
   margin-top: 5px;
 }
+
+.buy-btn[disabled] {
+  cursor: auto;
+}

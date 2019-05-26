@@ -25,7 +25,7 @@ export class ProductsService {
       'some product description',
       CategoryModel.laptops,
       200,
-      false,
+      true,
       ['tag1', 'tag2', 'tag3']
     ),
     new ProductModel(
@@ -34,7 +34,7 @@ export class ProductsService {
       'some product description',
       CategoryModel.mobile,
       500,
-      true,
+      false,
       ['tag1', 'tag2', 'tag3']
     )
   ];
