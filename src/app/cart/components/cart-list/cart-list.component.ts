@@ -22,7 +22,7 @@ export class CartListComponent implements OnInit, OnDestroy {
     this.sub = this.cartService.channel$.subscribe(
       product => {
         this.products.push(product);
-        this.sum += product.price;
+        this.sum = this.products.reduce((acc, item) => acc + item.price, 0);
       }
     );
   }

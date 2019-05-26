@@ -6,7 +6,7 @@
 
   <ul>
     <li *ngFor="let product of products">
-      {{ product.name }} - {{ product.price }}$
+      <app-cart-item [product]="product"></app-cart-item>
     </li>
   </ul>
 </div>
