@@ -6,12 +6,13 @@ import {ProductModel} from '../../../products/models/product.model';
 import {CartService} from '../../services/cart.service';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  selector: 'app-cart-list',
+  templateUrl: './cart-list.component.html',
+  styleUrls: ['./cart-list.component.css']
 })
-export class CartComponent implements OnInit, OnDestroy {
+export class CartListComponent implements OnInit, OnDestroy {
   products: ProductModel[] = [];
+  sum = 0;
   private sub: Subscription;
 
   constructor(private cartService: CartService) {
@@ -19,7 +20,10 @@ export class CartComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.cartService.channel$.subscribe(
-      product => (this.products.push(product))
+      product => {
+        this.products.push(product);
+        this.sum += product.price;
+      }
     );
   }
 
