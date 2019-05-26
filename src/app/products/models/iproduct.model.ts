@@ -1,4 +1,3 @@
-// желательно файл назвать iproduct.model.ts
 import {CategoryModel} from './category.model';
 
 export interface IProductModel {
