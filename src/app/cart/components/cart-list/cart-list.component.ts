@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Subscription} from 'rxjs';
 
-import {ProductModel} from '../../../products/models/product.model';
+import {CartItemModel} from '../../models/cart-item.model';
 import {CartService} from '../../services/cart.service';
 
 @Component({
@@ -11,7 +11,7 @@ import {CartService} from '../../services/cart.service';
   styleUrls: ['./cart-list.component.css']
 })
 export class CartListComponent implements OnInit, OnDestroy {
-  products: ProductModel[] = [];
+  products: CartItemModel[] = [];
   sum = 0;
   private sub: Subscription;
 
