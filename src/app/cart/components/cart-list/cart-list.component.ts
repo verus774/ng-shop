@@ -13,22 +13,25 @@ import {CartService} from '../../services/cart.service';
 export class CartListComponent implements OnInit, OnDestroy {
   products: CartItemModel[] = [];
   sum = 0;
+  quantity = 0;
+
   private sub: Subscription;
+  private sumSub: Subscription;
+  private quantitySub: Subscription;
 
   constructor(private cartService: CartService) {
   }
 
   ngOnInit() {
-    this.sub = this.cartService.channel$.subscribe(
-      product => {
-        this.products.push(product);
-        this.sum = this.products.reduce((acc, item) => acc + item.price, 0);
-      }
-    );
+    this.sub = this.cartService.channel$.subscribe(product => this.products.push(product));
+    this.sumSub = this.cartService.sumChannel$.subscribe(sum => this.sum = sum);
+    this.quantitySub = this.cartService.quantityChannel$.subscribe(quantity => this.quantity = quantity);
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+    this.sumSub.unsubscribe();
+    this.quantitySub.unsubscribe();
   }
 
 }
