@@ -5,8 +5,8 @@
   <h4>Total sum: {{ sum }}$</h4>
 
   <ul>
-    <li *ngFor="let item of items">
-      <app-cart-item [cartItem]="item"></app-cart-item>
+    <li *ngFor="let item of items; let i = index">
+      <app-cart-item [cartItem]="item" (removeCartItem)="onRemoveCartItem(i)"></app-cart-item>
     </li>
   </ul>
 </div>
