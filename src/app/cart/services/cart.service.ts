@@ -29,8 +29,16 @@ export class CartService {
     );
   }
 
-  public addItem(item: CartItemModel): Observable<any> {
-    this.cartItems.push(item);
+  public addItem(newItem: CartItemModel): Observable<any> {
+    const existsItemIdx = this.cartItems.findIndex(item => item.id === newItem.id);
+
+    if (existsItemIdx > -1) {
+      newItem.quantity = this.cartItems[existsItemIdx].quantity + 1;
+      this.cartItems.splice(existsItemIdx, 1, newItem);
+    } else {
+      this.cartItems.push(newItem);
+    }
+
     this.cartItemsSource.next(this.cartItems);
     return of({success: true});
   }
