@@ -11,11 +11,11 @@ import {CartService} from '../../services/cart.service';
   styleUrls: ['./cart-list.component.css']
 })
 export class CartListComponent implements OnInit, OnDestroy {
-  products: CartItemModel[] = [];
+  items: CartItemModel[] = [];
   sum = 0;
   quantity = 0;
 
-  private sub: Subscription;
+  private cartItemsSub: Subscription;
   private sumSub: Subscription;
   private quantitySub: Subscription;
 
@@ -23,13 +23,13 @@ export class CartListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.sub = this.cartService.channel$.subscribe(product => this.products.push(product));
-    this.sumSub = this.cartService.sumChannel$.subscribe(sum => this.sum = sum);
-    this.quantitySub = this.cartService.quantityChannel$.subscribe(quantity => this.quantity = quantity);
+    this.cartItemsSub = this.cartService.getItems().subscribe(items => this.items = items);
+    this.sumSub = this.cartService.getSum().subscribe(sum => this.sum = sum);
+    this.quantitySub = this.cartService.getQuantity().subscribe(quantity => this.quantity = quantity);
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.cartItemsSub.unsubscribe();
     this.sumSub.unsubscribe();
     this.quantitySub.unsubscribe();
   }

@@ -1,12 +1,12 @@
 <h3>Cart</h3>
 
-<div *ngIf="products.length; else emptyCart">
+<div *ngIf="items.length; else emptyCart">
   <h4>Total quantity: {{ quantity }}</h4>
   <h4>Total sum: {{ sum }}$</h4>
 
   <ul>
-    <li *ngFor="let product of products">
-      <app-cart-item [product]="product"></app-cart-item>
+    <li *ngFor="let item of items">
+      <app-cart-item [cartItem]="item"></app-cart-item>
     </li>
   </ul>
 </div>

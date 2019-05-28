@@ -1,32 +1,37 @@
 import {Injectable} from '@angular/core';
 
-import {Subject} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 
 import {CartItemModel} from '../models/cart-item.model';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private channel = new Subject<CartItemModel>();
-  private sumChannel = new Subject<number>();
-  private quantityChannel = new Subject<number>();
-
-  public channel$ = this.channel.asObservable();
-  public sumChannel$ = this.sumChannel.asObservable();
-  public quantityChannel$ = this.quantityChannel.asObservable();
-
+  private cartItemsSource = new Subject<CartItemModel[]>();
+  private cartItems$ = this.cartItemsSource.asObservable();
   private cartItems: CartItemModel[] = [];
-  private totalSum = 0;
-  private totalQuantity = 0;
 
-  addProduct(product: CartItemModel) {
-    this.cartItems.push(product);
-    this.totalSum += product.sum;
-    this.totalQuantity += product.quantity;
+  public getItems(): Observable<CartItemModel[]> {
+    return this.cartItems$;
+  }
 
-    this.channel.next(product);
-    this.sumChannel.next(this.totalSum);
-    this.quantityChannel.next(this.totalQuantity);
+  public getSum(): Observable<number> {
+    return this.cartItems$.pipe(
+      map((items: CartItemModel[]) => items.reduce((acc, val) => acc + val.sum, 0))
+    );
+  }
+
+  public getQuantity(): Observable<number> {
+    return this.cartItems$.pipe(
+      map((items: CartItemModel[]) => items.reduce((acc, val) => acc + val.quantity, 0))
+    );
+  }
+
+  public addItem(item: CartItemModel): Observable<any> {
+    this.cartItems.push(item);
+    this.cartItemsSource.next(this.cartItems);
+    return of({success: true});
   }
 }
