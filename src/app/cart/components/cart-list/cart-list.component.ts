@@ -34,4 +34,7 @@ export class CartListComponent implements OnInit, OnDestroy {
     this.quantitySub.unsubscribe();
   }
 
+  onRemoveCartItem(idx: number) {
+    this.cartService.removeItem(idx);
+  }
 }

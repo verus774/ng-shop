@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 
 import {Observable, of, Subject} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import {CartItemModel} from '../models/cart-item.model';
-import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,12 @@ export class CartService {
 
   public addItem(item: CartItemModel): Observable<any> {
     this.cartItems.push(item);
+    this.cartItemsSource.next(this.cartItems);
+    return of({success: true});
+  }
+
+  removeItem(idx: number): Observable<any> {
+    this.cartItems.splice(idx, 1);
     this.cartItemsSource.next(this.cartItems);
     return of({success: true});
   }
