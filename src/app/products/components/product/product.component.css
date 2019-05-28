@@ -30,3 +30,7 @@ p {
 .buy-btn[disabled] {
   cursor: auto;
 }
+
+.not-available {
+  background-color: #f2f2f2;
+}
