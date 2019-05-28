@@ -43,9 +43,23 @@ export class CartService {
     return of({success: true});
   }
 
-  removeItem(idx: number): Observable<any> {
+  removeItem(cartItem: CartItemModel): Observable<any> {
+    const idx = this.cartItems.findIndex(item => item.id === cartItem.id);
+
     this.cartItems.splice(idx, 1);
     this.cartItemsSource.next(this.cartItems);
     return of({success: true});
+  }
+
+  changeQuantity(cartItem: CartItemModel, increase = true): Observable<any> {
+    const idx = this.cartItems.findIndex(item => item.id === cartItem.id);
+
+    if (idx > -1) {
+      let origQuantity = this.cartItems[idx].quantity;
+      cartItem.quantity = increase ? ++origQuantity : --origQuantity;
+      this.cartItems.splice(idx, 1, cartItem);
+      this.cartItemsSource.next(this.cartItems);
+      return of({success: true});
+    }
   }
 }
