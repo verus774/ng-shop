@@ -56,7 +56,15 @@ export class CartService {
 
     if (idx > -1) {
       let origQuantity = this.cartItems[idx].quantity;
-      cartItem.quantity = increase ? ++origQuantity : --origQuantity;
+
+      if (increase) {
+        cartItem.quantity = ++origQuantity;
+      } else {
+        if (cartItem.quantity > 1) {
+          cartItem.quantity = --origQuantity;
+        }
+      }
+
       this.cartItems.splice(idx, 1, cartItem);
       this.cartItemsSource.next(this.cartItems);
       return of({success: true});
