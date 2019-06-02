@@ -7,3 +7,13 @@
   * change product quantity
   * remove product
 * colorize directive
+
+## Task 3
+* services
+  * LocalStorageService
+  * ConfigOptionsService
+  * ConstantsService
+  * GeneratorService
+* select directive
+* clear cart button
+* ability to set product quantity from product card
