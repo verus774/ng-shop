@@ -10,9 +10,12 @@ import {ProductModel} from '../../models/product.model';
 })
 export class ProductComponent {
   @Input() product: ProductModel;
-  @Output() private buyProduct = new EventEmitter<ProductModel>();
+  @Output() private buyProduct = new EventEmitter();
 
-  onBuyProduct(product: ProductModel): void {
-    this.buyProduct.emit(product);
+  quantity = 1;
+
+  onBuyProduct(product: ProductModel, quantity: number): void {
+    this.buyProduct.emit({product, quantity});
+    this.quantity = 1;
   }
 }

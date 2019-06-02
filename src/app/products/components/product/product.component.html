@@ -1,4 +1,4 @@
-<div class="product" [ngClass]="{'not-available': !product.isAvailable}" appColorize>
+<div class="product" [ngClass]="{'not-available': !product.isAvailable}" appColorize appSelect="red">
   <p>Category: {{ product.category }}</p>
   <p>Name: {{ product.name }}</p>
   <p>Description: {{ product.description }}</p>
@@ -12,5 +12,9 @@
     </span>
   </p>
 
-  <button [disabled]="!product.isAvailable" (click)="onBuyProduct(product)" class="buy-btn">Buy</button>
+  <div class="buy-controls">
+    <label for="quantity">Quantity</label>
+    <input id="quantity" type="number" [(ngModel)]="quantity">
+    <button [disabled]="!product.isAvailable" (click)="onBuyProduct(product, quantity)" class="buy-btn">Buy</button>
+  </div>
 </div>

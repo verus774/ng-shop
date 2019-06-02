@@ -34,3 +34,12 @@ p {
 .not-available {
   background-color: #f2f2f2;
 }
+
+.buy-controls {
+  align-self: flex-end;
+}
+
+input[type=number]{
+  width: 50px;
+  margin-right: 10px;
+}

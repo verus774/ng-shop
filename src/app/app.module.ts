@@ -4,11 +4,15 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {ProductsModule} from './products/products.module';
 import {CartModule} from './cart/cart.module';
+import {CoreModule} from './core/core.module';
+import {LayoutModule} from './layout/layout.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    CoreModule,
+    LayoutModule,
     ProductsModule,
     CartModule,
   ],
