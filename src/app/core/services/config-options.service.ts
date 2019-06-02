@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
 
 import {CoreModule} from '../core.module';
+import {ConfigModel} from '../models/config.model';
 
 @Injectable({
   providedIn: CoreModule
 })
 export class ConfigOptionsService {
-  private config: any = {};
+  private config: ConfigModel = new ConfigModel();
 
   getConfig(): any {
     return this.config;
   }
 
-  setConfig(config: any): void {
+  setConfig(config: ConfigModel): void {
     this.config = config;
   }
 
