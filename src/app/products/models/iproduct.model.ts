@@ -7,5 +7,6 @@ export interface IProductModel {
   category: CategoryModel;
   price: number;
   isAvailable?: boolean;
+  updated: string;
   tags?: string[];
 }
