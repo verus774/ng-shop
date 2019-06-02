@@ -19,7 +19,7 @@ export class CartListComponent implements OnInit, OnDestroy {
   private sumSub: Subscription;
   private quantitySub: Subscription;
 
-  constructor(private cartService: CartService) {
+  constructor(public cartService: CartService) {
   }
 
   ngOnInit() {
