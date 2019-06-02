@@ -1,6 +1,5 @@
-import {InjectionToken} from '@angular/core';
-
-export const RandomString5 = new InjectionToken<string>('RandomString5');
+import {Injectable} from '@angular/core';
+import {CoreModule} from '../core.module';
 
 function GenerateNFactory(n: number = 1) {
   return (): string => {
@@ -14,7 +13,9 @@ function GenerateNFactory(n: number = 1) {
   };
 }
 
-export const GeneratorService = {
-  provide: RandomString5,
+@Injectable({
+  providedIn: CoreModule,
   useFactory: GenerateNFactory(5)
-};
+})
+export class GeneratorService {
+}
