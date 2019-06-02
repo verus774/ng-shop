@@ -18,10 +18,14 @@ export class SelectDirective implements AfterViewInit {
     this.origBorderColor = getComputedStyle(this.el).borderColor;
   }
 
-  @HostListener('click')
-  onClick() {
-    this.isSelected = !this.isSelected;
-    this.select(this.color || 'green');
+  @HostListener('click', ['$event'])
+  onClick(event) {
+    const tag = event.target.tagName;
+
+    if (tag !== 'BUTTON' && tag !== 'INPUT') {
+      this.isSelected = !this.isSelected;
+      this.select(this.color || 'green');
+    }
   }
 
   private select(color: string) {
