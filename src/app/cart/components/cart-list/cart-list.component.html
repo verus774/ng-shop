@@ -1,11 +1,26 @@
 <h3>Cart</h3>
 
 <div *ngIf="items.length; else emptyCart">
-  <h4>Total quantity: {{ quantity }}</h4>
-  <h4>Total sum: {{ sum }}$</h4>
+  <div class="meta">
+    <h4>Total quantity: {{ quantity }}</h4>
+    <h4>Total sum: {{ sum }}$</h4>
+  </div>
+
+  <p class="sorting">
+    <label for="sorting-prop">sort by</label>
+    <select [(ngModel)]="currSortingProp" id="sorting-prop">
+      <option *ngFor="let prop of sortingProps" [ngValue]="prop">{{ prop }}</option>
+    </select>
+
+    <label for="sorting-prop">order</label>
+    <select [(ngModel)]="currSortingDesc">
+      <option [ngValue]="false">asc</option>
+      <option [ngValue]="true">desc</option>
+    </select>
+  </p>
 
   <ul>
-    <li *ngFor="let item of items; let i = index">
+    <li *ngFor="let item of items | orderBy:currSortingProp :currSortingDesc">
       <app-cart-item [cartItem]="item"
                      (removeCartItem)="onRemoveCartItem($event)"
                      (increaseQuantity)="onIncreaseQuantity($event)"

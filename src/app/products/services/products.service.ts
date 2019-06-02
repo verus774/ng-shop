@@ -22,7 +22,7 @@ export class ProductsService {
     ),
     new ProductModel(
       2,
-      'Product 2',
+      'Z Product 2',
       'some product description',
       CategoryModel.laptops,
       200,
@@ -37,6 +37,16 @@ export class ProductsService {
       CategoryModel.mobile,
       500,
       false,
+      '2018-06-30T09:05:05.035Z',
+      ['tag1', 'tag2', 'tag3']
+    ),
+    new ProductModel(
+      4,
+      'A Product 3',
+      'some product description',
+      CategoryModel.mobile,
+      300,
+      true,
       '2018-06-30T09:05:05.035Z',
       ['tag1', 'tag2', 'tag3']
     )
