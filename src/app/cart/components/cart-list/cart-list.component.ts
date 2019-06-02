@@ -15,6 +15,10 @@ export class CartListComponent implements OnInit, OnDestroy {
   sum = 0;
   quantity = 0;
 
+  sortingProps = ['price', 'name', 'quantity'];
+  currSortingProp = this.sortingProps[0];
+  currSortingDesc = true;
+
   private cartItemsSub: Subscription;
   private sumSub: Subscription;
   private quantitySub: Subscription;

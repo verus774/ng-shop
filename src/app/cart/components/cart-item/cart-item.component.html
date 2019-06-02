@@ -1,4 +1,4 @@
-{{ cartItem.name }} - {{ cartItem.sum }}$ - quantity
+{{ cartItem.name }} - price: {{ cartItem.price }} - sum: {{ cartItem.sum }}$
 <button (click)="onIncreaseQuantity(cartItem)">+</button> {{ cartItem.quantity }}
 <button (click)="onDecreaseQuantity(cartItem)">-</button>
 <button (click)="onRemoveCartItem(cartItem)">X</button>

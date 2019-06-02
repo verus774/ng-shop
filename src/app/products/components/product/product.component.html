@@ -1,8 +1,8 @@
 <div class="product" [ngClass]="{'not-available': !product.isAvailable}" appColorize appSelect="red">
-  <p>Category: {{ product.category }}</p>
+  <p>Category: {{ product.category | uppercase}}</p>
   <p>Name: {{ product.name }}</p>
   <p>Description: {{ product.description }}</p>
-  <p>Price: {{ product.price }}$</p>
+  <p>Price: {{ product.price | currency:'USD' :'symbol':'1.2-2':'ru' }}</p>
 
   <p>Availability: {{ product.isAvailable ? 'not' : '' }} available</p>
 
@@ -17,4 +17,8 @@
     <input id="quantity" type="number" [(ngModel)]="quantity">
     <button [disabled]="!product.isAvailable" (click)="onBuyProduct(product, quantity)" class="buy-btn">Buy</button>
   </div>
+
+  <p>
+    <i>Updated: {{ product.updated | date:'dd.MM.yyyy' }}</i>
+  </p>
 </div>
