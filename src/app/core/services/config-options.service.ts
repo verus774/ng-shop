@@ -7,26 +7,14 @@ import {ConfigModel} from '../models/config.model';
   providedIn: CoreModule
 })
 export class ConfigOptionsService {
-  private config: ConfigModel = new ConfigModel();
+  private config: ConfigModel;
 
   getConfig(): any {
     return this.config;
   }
 
-  setConfig(config: ConfigModel): void {
-    this.config = config;
-  }
-
-  setId(id: number): void {
-    this.config.id = id;
-  }
-
-  setLogin(login: string): void {
-    this.config.login = login;
-  }
-
-  setEmail(email: string): void {
-    this.config.email = email;
+  setConfig(config: Partial<ConfigModel>) {
+    this.config = {...this.config, ...config};
   }
 
 }
