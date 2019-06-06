@@ -10,7 +10,7 @@ import {ProductModel} from '../../models/product.model';
 })
 export class ProductComponent {
   @Input() product: ProductModel;
-  @Output() private buyProduct = new EventEmitter();
+  @Output() private buyProduct = new EventEmitter<{product: ProductModel, quantity: number}>();
 
   quantity = 1;
 

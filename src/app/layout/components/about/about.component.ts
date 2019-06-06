@@ -25,7 +25,7 @@ export class AboutComponent implements OnInit {
     console.log(this.localStorageService.getItem('test'));
     this.localStorageService.removeItem('test');
 
-    this.configOptionsService.setLogin('john123');
+    this.configOptionsService.setConfig({login: 'john123'});
     console.log(this.configOptionsService.getConfig());
 
     console.log(this.constantsService);

@@ -22,8 +22,7 @@ export class ProductListComponent implements OnInit {
     this.products$ = this.productsService.getProducts();
   }
 
-  // без типа?
-  onBuyProduct(evt): void {
+  onBuyProduct(evt: {product: ProductModel, quantity: number}): void {
     const {id, name, price} = evt.product;
     const {quantity} = evt;
 
