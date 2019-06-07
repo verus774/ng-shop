@@ -8,6 +8,7 @@ import {ProductsModule} from './products/products.module';
 import {CartModule} from './cart/cart.module';
 import {CoreModule} from './core/core.module';
 import {LayoutModule} from './layout/layout.module';
+import {AppRoutingModule} from './app-routing.module';
 
 registerLocaleData(localeRu);
 
@@ -19,6 +20,7 @@ registerLocaleData(localeRu);
     LayoutModule,
     ProductsModule,
     CartModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
