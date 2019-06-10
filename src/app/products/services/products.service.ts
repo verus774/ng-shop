@@ -55,4 +55,8 @@ export class ProductsService {
   getProducts(): Observable<ProductModel[]> {
     return of(this.products);
   }
+
+  getProduct(id: number): Observable<ProductModel> {
+    return of(this.products.find(product => product.id === id));
+  }
 }

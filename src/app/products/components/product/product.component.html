@@ -20,6 +20,6 @@
 
   <p class="details">
     <i>Updated: {{ product.updated | date:'dd.MM.yyyy' }}</i>
-    <a [routerLink]="['/product', product.id, {outlets: {reviews: ['reviews']}}]">reviews</a>
+    <a [routerLink]="['/product', product.id]">Details</a>
   </p>
 </div>

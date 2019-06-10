@@ -1,0 +1,16 @@
+<div class="product">
+  <p>Category: {{ product.category | uppercase}}</p>
+  <p>Name: {{ product.name }}</p>
+  <p>Description: {{ product.description }}</p>
+  <p>Price: {{ product.price | currency:'USD' :'symbol':'1.2-2':'ru' }}</p>
+
+  <p>Availability: {{ product.isAvailable ? 'not' : '' }} available</p>
+
+  <p>Tags:
+    <span *ngFor="let tag of product.tags" class="tag">
+    {{ tag }}
+    </span>
+  </p>
+
+  <button type="button" (click)="onGoBack()">Back</button>
+</div>
