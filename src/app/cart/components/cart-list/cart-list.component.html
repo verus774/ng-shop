@@ -29,7 +29,10 @@
     </li>
   </ul>
 
-  <button (click)="cartService.clearCart()">Clear cart</button>
+  <div class="actions">
+    <button (click)="cartService.clearCart()">Clear cart</button>
+    <a routerLink="/order">Order</a>
+  </div>
 </div>
 
 <ng-template #emptyCart>
