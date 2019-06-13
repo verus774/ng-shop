@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import {CartItemModel} from '../models/cart-item.model';
@@ -9,7 +9,7 @@ import {CartItemModel} from '../models/cart-item.model';
   providedIn: 'root'
 })
 export class CartService {
-  private cartItemsSource = new Subject<CartItemModel[]>();
+  private cartItemsSource = new BehaviorSubject<CartItemModel[]>([]);
   private cartItems$ = this.cartItemsSource.asObservable();
   private cartItems: CartItemModel[] = [];
 
