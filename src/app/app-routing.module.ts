@@ -1,13 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {PathNotFoundComponent} from './layout';
+import {LoginComponent, PathNotFoundComponent} from './layout';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'products-list',
     pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '**',

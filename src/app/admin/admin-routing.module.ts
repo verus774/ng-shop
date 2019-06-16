@@ -5,11 +5,13 @@ import {AdminComponent} from './admin.component';
 import {ManageProductsComponent} from './components';
 import {ProductFormComponent} from './components/product-form/product-form.component';
 import {ProductResolveGuard} from './guards/product-resolve.guard';
+import {AuthGuard} from '../core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
