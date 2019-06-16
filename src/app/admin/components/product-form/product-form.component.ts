@@ -27,9 +27,15 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSaveProduct() {
+    const product = { ...this.product };
+    const method = product.id ? 'updateProduct' : 'addProduct';
+
+    this.productsService[method](product).subscribe(
+        () => this.onGoBack()
+      );
   }
 
   onGoBack(): void {
-    this.router.navigate(['..']);
+    this.router.navigate(['admin/products']);
   }
 }

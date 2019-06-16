@@ -9,9 +9,10 @@ export class ProductModel implements IProductModel {
     public category: CategoryModel,
     public price: number,
     public isAvailable: boolean,
-    public updated: string,
+    public updated?: string,
     public tags?: string[],
   ) {
+    this.updated = updated || new Date().toISOString();
     this.tags = tags || [];
   }
 }
