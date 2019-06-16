@@ -1,0 +1,12 @@
+<h3>Product form</h3>
+
+<form *ngIf="product" (ngSubmit)="onSaveProduct()" id="user-form" #form="ngForm">
+  <p>
+    <label for="firstName">Name</label>
+    <input type="text"
+           id="firstName" name="firstName"
+           placeholder="Name"
+           required
+           [(ngModel)]="product.name">
+  </p>
+</form>
