@@ -6,12 +6,3 @@ h1 {
   display: flex;
   justify-content: space-evenly;
 }
-
-.active {
-  color: red;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
