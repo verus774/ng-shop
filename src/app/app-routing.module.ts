@@ -14,6 +14,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'admin',
+    loadChildren: './admin/admin.module#AdminModule'
+  },
+  {
     path: '**',
     component: PathNotFoundComponent,
     data: {title: 'Page Not Found'}

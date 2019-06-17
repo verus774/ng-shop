@@ -10,7 +10,6 @@ import {CoreModule} from './core/core.module';
 import {LayoutModule} from './layout/layout.module';
 import {AppRoutingModule} from './app-routing.module';
 import {OrdersModule} from './orders/orders.module';
-import {AdminModule} from './admin/admin.module';
 
 registerLocaleData(localeRu);
 
@@ -23,7 +22,6 @@ registerLocaleData(localeRu);
     ProductsModule,
     CartModule,
     OrdersModule,
-    AdminModule,
     AppRoutingModule,
   ],
   providers: [],
