@@ -21,3 +21,16 @@
 ## Task 4
 * use built-in pipes in ProductComponent
 * use OrderByPipe in CartListComponent
+
+## Task 5
+* products list (`/products-list`)
+* product details (`/product/:productID`)
+  * secondary router-outlet for product reviews
+* cart (`/cart`)
+* make order from cart (`/order`)
+* AdminModule (lazy loading, canActivateGuard)
+  * `/admin`
+  * `/admin/products`
+  * `/admin/product/add`
+  * `/admin/product/edit:productID + resolve guard`
+  * `/admin/orders`
