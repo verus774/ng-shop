@@ -1,0 +1,24 @@
+<h3>Product form</h3>
+
+<form *ngIf="product" (ngSubmit)="onSaveProduct()" #form="ngForm">
+  <p>
+    <label>
+      Name
+      <input type="text" name="firstName" placeholder="Name"
+             required
+             [(ngModel)]="product.name">
+    </label>
+  </p>
+
+  <p>
+    <label>
+      Price
+      <input type="number" name="price" placeholder="Price"
+             required
+             [(ngModel)]="product.price">
+    </label>
+  </p>
+
+  <button [disabled]="form.invalid" type="submit">Save</button>
+  <button type="button" (click)="onGoBack()">Back</button>
+</form>

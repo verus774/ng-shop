@@ -1,6 +1,27 @@
-<h1 #appTitle></h1>
+<header>
+  <nav>
+    <a routerLink="/">
+      <h1 #appTitle></h1>
+    </a>
+
+    <ul>
+      <li>
+        <a routerLink="/products-list" routerLinkActive="active">Products</a>
+      </li>
+      <li>
+        <a routerLink="/login" routerLinkActive="active">Login</a>
+      </li>
+      <li>
+        <a routerLink="/cart" routerLinkActive="active">Cart</a>
+      </li>
+      <li>
+        <a routerLink="/admin" routerLinkActive="active">Admin</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
 <div class="container">
-  <app-product-list></app-product-list>
-  <app-cart-list></app-cart-list>
+  <router-outlet></router-outlet>
   <app-about></app-about>
 </div>

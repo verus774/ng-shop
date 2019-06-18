@@ -1,0 +1,24 @@
+<h3>Order</h3>
+
+<table>
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Quantity</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of items; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ product.name }}</td>
+    <td>{{ product.price }}</td>
+    <td>{{ product.quantity }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<p>Total sum: {{ sum }}</p>
+<p>Total quantity: {{ quantity }}</p>
+<button (click)="onMakeOrder()">Make order</button>

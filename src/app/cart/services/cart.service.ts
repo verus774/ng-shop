@@ -1,17 +1,22 @@
 import {Injectable} from '@angular/core';
 
-import {Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import {CartItemModel} from '../models/cart-item.model';
+import {LocalStorageService} from '../../core/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private cartItemsSource = new Subject<CartItemModel[]>();
+  private cartItemsKey = 'cartItems';
+  private cartItems: CartItemModel[] = JSON.parse(this.localStorageService.getItem(this.cartItemsKey)) || [];
+  private cartItemsSource = new BehaviorSubject<CartItemModel[]>(this.cartItems);
   private cartItems$ = this.cartItemsSource.asObservable();
-  private cartItems: CartItemModel[] = [];
+
+  constructor(private localStorageService: LocalStorageService) {
+  }
 
   public getItems(): Observable<CartItemModel[]> {
     return this.cartItems$;
@@ -25,7 +30,7 @@ export class CartService {
 
   public getQuantity(): Observable<number> {
     return this.cartItems$.pipe(
-      map((items: CartItemModel[]) => items.reduce((acc, val) => acc + val.quantity, 0))
+      map((items: CartItemModel[]) => items.reduce((acc, val) => acc + val.quantity, 0)),
     );
   }
 
@@ -39,7 +44,9 @@ export class CartService {
       this.cartItems.push(newItem);
     }
 
+    this.localStorageService.setItem(this.cartItemsKey, JSON.stringify(this.cartItems));
     this.cartItemsSource.next(this.cartItems);
+
     return of({success: true});
   }
 
@@ -47,13 +54,18 @@ export class CartService {
     const idx = this.cartItems.findIndex(item => item.id === cartItem.id);
 
     this.cartItems.splice(idx, 1);
+
+    this.localStorageService.setItem(this.cartItemsKey, JSON.stringify(this.cartItems));
     this.cartItemsSource.next(this.cartItems);
+
     return of({success: true});
   }
 
   public clearCart(): Observable<any> {
     this.cartItems = [];
+    this.localStorageService.removeItem(this.cartItemsKey);
     this.cartItemsSource.next(this.cartItems);
+
     return of({success: true});
   }
 
@@ -72,7 +84,10 @@ export class CartService {
       }
 
       this.cartItems.splice(idx, 1, cartItem);
+
+      this.localStorageService.setItem(this.cartItemsKey, JSON.stringify(this.cartItems));
       this.cartItemsSource.next(this.cartItems);
+
       return of({success: true});
     }
   }

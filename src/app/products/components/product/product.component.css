@@ -43,3 +43,9 @@ input[type=number]{
   width: 50px;
   margin-right: 10px;
 }
+
+.details {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}

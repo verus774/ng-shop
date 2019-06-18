@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 import {Subscription} from 'rxjs';
 
@@ -23,7 +24,7 @@ export class CartListComponent implements OnInit, OnDestroy {
   private sumSub: Subscription;
   private quantitySub: Subscription;
 
-  constructor(public cartService: CartService) {
+  constructor(public cartService: CartService, private router: Router) {
   }
 
   ngOnInit() {
@@ -48,5 +49,13 @@ export class CartListComponent implements OnInit, OnDestroy {
 
   onDecreaseQuantity(cartItem: CartItemModel): void {
     this.cartService.changeQuantity(cartItem, false);
+  }
+
+  makeOrder() {
+    this.router.navigate(['/order'], {state: {data: {
+          items: this.items,
+          sum: this.sum,
+          quantity: this.quantity,
+        }}});
   }
 }

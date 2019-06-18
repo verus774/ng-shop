@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 
 import {ProductModel} from '../models/product.model';
 import {CategoryModel} from '../models/category.model';
@@ -51,8 +51,35 @@ export class ProductsService {
       ['tag1', 'tag2', 'tag3']
     )
   ];
+  private id = 100;
+
+  private productsSource = new BehaviorSubject<ProductModel[]>(this.products);
+  private products$ = this.productsSource.asObservable();
 
   getProducts(): Observable<ProductModel[]> {
-    return of(this.products);
+    return this.products$;
+  }
+
+  getProduct(id: number): Observable<ProductModel> {
+    return of(this.products.find(product => product.id === id));
+  }
+
+  addProduct(product: ProductModel): Observable<any> {
+    this.products.push({id: ++this.id, ...product});
+    this.productsSource.next(this.products);
+
+    return of({success: true});
+  }
+
+  updateProduct(product: ProductModel): Observable<any> {
+    this.products = this.products.map((item: ProductModel)  => {
+      if (product.id === item.id) {
+        return {...item, ...product};
+      }
+      return item;
+    });
+    this.productsSource.next(this.products);
+
+    return of({success: true});
   }
 }

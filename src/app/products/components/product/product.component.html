@@ -18,7 +18,8 @@
     <button [disabled]="!product.isAvailable" (click)="onBuyProduct(product, quantity)" class="buy-btn">Buy</button>
   </div>
 
-  <p>
+  <p class="details">
     <i>Updated: {{ product.updated | date:'dd.MM.yyyy' }}</i>
+    <a [routerLink]="['/product', product.id]">Details</a>
   </p>
 </div>

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {AboutComponent} from './components/about/about.component';
+import {AboutComponent, LoginComponent, PathNotFoundComponent} from './components';
 
 @NgModule({
   imports: [
@@ -9,6 +9,8 @@ import {AboutComponent} from './components/about/about.component';
   ],
   declarations: [
     AboutComponent,
+    PathNotFoundComponent,
+    LoginComponent,
   ],
   exports: [
     AboutComponent,
