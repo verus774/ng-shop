@@ -12,5 +12,10 @@
     </span>
   </p>
 
-  <button type="button" (click)="onGoBack()">Back</button>
+  <div class="actions">
+    <a [routerLink]="[{ outlets: { reviews: ['reviews'] } }]">Reviews</a>
+    <button type="button" (click)="onGoBack()">Back</button>
+  </div>
 </div>
+
+<router-outlet name="reviews"></router-outlet>

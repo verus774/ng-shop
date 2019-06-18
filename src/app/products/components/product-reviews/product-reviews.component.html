@@ -1,3 +1,5 @@
-<p>
-  product-reviews works!
-</p>
+<div class="container">
+  <h4>Reviews</h4>
+  <a [routerLink]="['..', { outlets: { reviews: null } }]">Close</a>
+  <p>Reviews for <strong>{{ product.name }}</strong></p>
+</div>

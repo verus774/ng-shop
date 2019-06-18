@@ -26,3 +26,10 @@ button {
   text-transform: uppercase;
   margin-top: 5px;
 }
+
+.actions {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
