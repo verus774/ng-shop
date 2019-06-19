@@ -34,3 +34,9 @@
   * `/admin/product/add`
   * `/admin/product/edit:productID + resolve guard`
   * `/admin/orders`
+
+## Task 6
+* get products from json-server
+* use HttpClient in ProductsService (Promise/Observable)
+* add `core/interceptors/TimingInterceptor`
+* add `core/services/AppSettingsService` (usage example in `layout/components/AboutComponent`)
