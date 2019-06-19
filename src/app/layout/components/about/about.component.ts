@@ -4,6 +4,7 @@ import {LocalStorageService} from '../../../core/services/local-storage.service'
 import {ConfigOptionsService} from '../../../core/services/config-options.service';
 import {ConstantsService} from '../../../core/services/constant.service';
 import {GeneratorService} from '../../../core/services/generator.service';
+import {AppSettingsService} from '../../../core/services/app-settings.service';
 
 @Component({
   selector: 'app-about',
@@ -17,6 +18,7 @@ export class AboutComponent implements OnInit {
     @Optional() private configOptionsService: ConfigOptionsService,
     @Optional() private constantsService: ConstantsService,
     @Optional() private generatorService: GeneratorService,
+    private appSettingsService: AppSettingsService,
   ) {
   }
 
@@ -30,6 +32,10 @@ export class AboutComponent implements OnInit {
 
     console.log(this.constantsService);
     console.log(this.generatorService);
+
+    this.appSettingsService.getSettings().subscribe(value => {
+      console.log(value);
+    });
   }
 
 }

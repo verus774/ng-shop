@@ -30,9 +30,9 @@ export class ProductFormComponent implements OnInit {
     const product = { ...this.product };
     const method = product.id ? 'updateProduct' : 'addProduct';
 
-    this.productsService[method](product).subscribe(
-        () => this.onGoBack()
-      );
+    this.productsService[method](product)
+      .then(() => this.onGoBack())
+      .catch(err => console.log(err));
   }
 
   onGoBack(): void {
