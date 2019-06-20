@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 
-import {ProductModel} from '../../../products/models/product.model';
-import {ProductsService} from '../../../products/services/products.service';
+import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+
+import {AppState} from '../../../core/+store';
+import {ProductsState} from '../../../core/+store/products';
+import * as ProductsActions from './../../../core/+store/products/products.actions';
 
 @Component({
   selector: 'app-manage-users',
@@ -10,13 +13,14 @@ import {ProductsService} from '../../../products/services/products.service';
   styleUrls: ['./manage-products.component.css']
 })
 export class ManageProductsComponent implements OnInit {
-  products$: Observable<ProductModel[]>;
+  productsState$: Observable<ProductsState>;
 
-  constructor(private productsService: ProductsService) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.products$ = this.productsService.getProducts();
+    this.productsState$ = this.store.pipe(select('products'));
+    this.store.dispatch(new ProductsActions.GetProducts());
   }
 
 }
