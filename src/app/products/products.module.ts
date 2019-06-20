@@ -3,11 +3,12 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
 
 import {ProductComponent, ProductDetailsComponent, ProductListComponent, ProductReviewsComponent} from './components';
 import {SharedModule} from '../shared/shared.module';
 import {ProductsRoutingModule} from './products-routing.module';
-import {productsReducer} from '../core/+store/products';
+import {ProductsEffects, productsReducer} from '../core/+store/products';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {productsReducer} from '../core/+store/products';
     ProductsRoutingModule,
     SharedModule,
     StoreModule.forFeature('products', productsReducer),
+    EffectsModule.forFeature([ProductsEffects]),
   ],
   exports: [
     ProductListComponent,

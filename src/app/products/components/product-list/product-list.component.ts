@@ -10,6 +10,7 @@ import {CartService} from '../../../cart/services/cart.service';
 import {CartItemModel} from '../../../cart/models/cart-item.model';
 import {ProductsState} from '../../../core/+store/products';
 import {AppState} from '../../../core/+store';
+import * as ProductsActions from './../../../core/+store/products/products.actions';
 
 @Component({
   selector: 'app-product-list',
@@ -28,6 +29,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.productsState$ = this.store.pipe(select('products'));
+    this.store.dispatch(new ProductsActions.GetProducts());
   }
 
   onBuyProduct(evt: {product: ProductModel, quantity: number}): void {
