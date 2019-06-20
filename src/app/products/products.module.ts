@@ -7,6 +7,7 @@ import {StoreModule} from '@ngrx/store';
 import {ProductComponent, ProductDetailsComponent, ProductListComponent, ProductReviewsComponent} from './components';
 import {SharedModule} from '../shared/shared.module';
 import {ProductsRoutingModule} from './products-routing.module';
+import {productsReducer} from '../core/+store/products';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {ProductsRoutingModule} from './products-routing.module';
     FormsModule,
     ProductsRoutingModule,
     SharedModule,
-    StoreModule.forFeature('products', {}),
+    StoreModule.forFeature('products', productsReducer),
   ],
   exports: [
     ProductListComponent,

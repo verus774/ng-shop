@@ -2,10 +2,14 @@ import {Component, OnInit} from '@angular/core';
 
 import {Observable} from 'rxjs';
 
+import {select, Store} from '@ngrx/store';
+
 import {ProductModel} from '../../models/product.model';
 import {ProductsService} from '../../services/products.service';
 import {CartService} from '../../../cart/services/cart.service';
 import {CartItemModel} from '../../../cart/models/cart-item.model';
+import {ProductsState} from '../../../core/+store/products';
+import {AppState} from '../../../core/+store';
 
 @Component({
   selector: 'app-product-list',
@@ -13,13 +17,17 @@ import {CartItemModel} from '../../../cart/models/cart-item.model';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products$: Observable<ProductModel[]>;
+  productsState$: Observable<ProductsState>;
 
-  constructor(private productsService: ProductsService, private cartService: CartService) {
+  constructor(
+    private productsService: ProductsService,
+    private cartService: CartService,
+    private store: Store<AppState>,
+  ) {
   }
 
   ngOnInit() {
-    this.products$ = this.productsService.getProducts();
+    this.productsState$ = this.store.pipe(select('products'));
   }
 
   onBuyProduct(evt: {product: ProductModel, quantity: number}): void {
