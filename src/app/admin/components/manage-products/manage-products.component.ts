@@ -3,9 +3,9 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
-import {AppState} from '../../../core/+store';
-import {ProductsState} from '../../../core/+store/products';
+import {AppState, getProductsCount, getProductsData} from '../../../core/+store';
 import * as ProductsActions from './../../../core/+store/products/products.actions';
+import {ProductModel} from '../../../products/models/product.model';
 
 @Component({
   selector: 'app-manage-users',
@@ -13,13 +13,16 @@ import * as ProductsActions from './../../../core/+store/products/products.actio
   styleUrls: ['./manage-products.component.css']
 })
 export class ManageProductsComponent implements OnInit {
-  productsState$: Observable<ProductsState>;
+  products$: Observable<ReadonlyArray<ProductModel>>;
+  productsCount$: Observable<number>;
 
   constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.productsState$ = this.store.pipe(select('products'));
+    this.products$ = this.store.pipe(select(getProductsData));
+    this.productsCount$ = this.store.pipe(select(getProductsCount));
+
     this.store.dispatch(new ProductsActions.GetProducts());
   }
 

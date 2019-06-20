@@ -1,4 +1,4 @@
-<h3>Products</h3>
+<h3>Products (total: {{ productsCount$ | async }})</h3>
 
 <a routerLink="../product/add">Add product</a>
 
@@ -11,7 +11,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let product of (productsState$ | async).data; let i = index">
+  <tr *ngFor="let product of products$ | async; let i = index">
     <td>{{ i + 1 }}</td>
     <td>{{ product.name }}</td>
     <td>
