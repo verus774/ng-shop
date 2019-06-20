@@ -1,4 +1,4 @@
-import {initialProductsState, ProductsState} from './products.state';
+import {initialProductsState, productAdapter, ProductsState} from './products.state';
 import {ProductsActions, ProductsActionTypes} from './products.actions';
 import {ProductModel} from '../../../products/models/product.model';
 
@@ -12,13 +12,9 @@ export function productsReducer(state = initialProductsState, action: ProductsAc
     }
 
     case ProductsActionTypes.GET_PRODUCTS_SUCCESS: {
-      const data = [...action.payload as ProductModel[]];
-      return {
-        ...state,
-        data,
-        loading: false,
-        loaded: true,
-      };
+      const tasks = [...action.payload as ProductModel[]];
+      return productAdapter.addAll(tasks, {...state, loading: false, loaded: true});
+
     }
 
     case ProductsActionTypes.GET_PRODUCTS_ERROR: {
