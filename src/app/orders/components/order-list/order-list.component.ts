@@ -36,6 +36,7 @@ export class OrderListComponent implements OnInit {
 
   onMakeOrder() {
     this.ordersService.addOrder(new OrderModel(
+      undefined,
       this.items,
       this.sum,
       this.quantity,

@@ -40,5 +40,66 @@
       "updated": "2018-06-30T09:05:05.035Z",
       "tags": ["tag1", "tag2", "tag3"]
     }
+  ],
+  "orders": [
+    {
+      "products": [
+        {
+          "id": 1,
+          "name": "Product 1",
+          "description": "some product description",
+          "category": "Electronic books",
+          "price": 100,
+          "isAvailable": true,
+          "updated": "2018-10-20T09:05:05.035Z",
+          "tags": [
+            "tag1",
+            "tag2",
+            "tag3"
+          ],
+          "quantity": 2
+        }
+      ],
+      "id": 1,
+      "sum": 200,
+      "quantity": 2
+    },
+    {
+      "products": [
+        {
+          "id": 1,
+          "name": "Product 1",
+          "description": "some product description",
+          "category": "Electronic books",
+          "price": 100,
+          "isAvailable": true,
+          "updated": "2018-10-20T09:05:05.035Z",
+          "tags": [
+            "tag1",
+            "tag2",
+            "tag3"
+          ],
+          "quantity": 2
+        },
+        {
+          "id": 4,
+          "name": "Product 4",
+          "description": "some product description",
+          "category": "Mobile phones",
+          "price": 300,
+          "isAvailable": true,
+          "updated": "2018-06-30T09:05:05.035Z",
+          "tags": [
+            "tag1",
+            "tag2",
+            "tag3"
+          ],
+          "quantity": 1
+        }
+      ],
+      "id": 2,
+      "sum": 500,
+      "quantity": 3
+    }
   ]
 }
