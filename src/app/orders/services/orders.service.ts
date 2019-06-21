@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 import {OrderModel} from '../models/order.model';
 
@@ -8,19 +10,34 @@ import {OrderModel} from '../models/order.model';
   providedIn: 'root'
 })
 export class OrdersService {
-  private orders: OrderModel[] = [];
-  private ordersSource = new BehaviorSubject<OrderModel[]>(this.orders);
-  private orders$ = this.ordersSource.asObservable();
+  private id = 100;
+  private ordersUrl = 'http://localhost:3000/orders';
+
+  constructor(private http: HttpClient) {
+  }
 
   getOrders(): Observable<OrderModel[]> {
-    return this.orders$;
+    return this.http
+      .get<OrderModel[]>(this.ordersUrl)
+      .pipe(catchError(this.handleError));
   }
 
   addOrder(order: OrderModel): Observable<any> {
-    this.orders.push(order);
-    this.ordersSource.next(this.orders);
+    const body = JSON.stringify({id: ++this.id, ...order});
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
 
-    return of({success: true});
+    return this.http
+      .post<OrderModel>(this.ordersUrl, body, options)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('An error occurred', error);
+    return throwError(error);
   }
 
 }

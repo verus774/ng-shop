@@ -1,6 +1,8 @@
-<h3>Products</h3>
+<h3>Products (total: {{ productsCount$ | async }})</h3>
 
 <a routerLink="../product/add">Add product</a>
+
+<p *ngIf="(productsError$ | async) as value">{{value.message || value}}</p>
 
 <table>
   <thead>

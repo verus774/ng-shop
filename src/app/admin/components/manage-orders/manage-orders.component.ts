@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 
 import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
 
+import {getOrdersData, getOrdersError} from '../../../core/+store/orders';
+import {AppState} from '../../../core/+store';
+import * as OrdersActions from './../../../core/+store/orders/orders.actions';
 import {OrderModel} from '../../../orders/models/order.model';
-import {OrdersService} from '../../../orders/services/orders.service';
 
 @Component({
   selector: 'app-manage-orders',
@@ -11,13 +14,17 @@ import {OrdersService} from '../../../orders/services/orders.service';
   styleUrls: ['./manage-orders.component.css']
 })
 export class ManageOrdersComponent implements OnInit {
-  orders$: Observable<OrderModel[]>;
+  orders$: Observable<ReadonlyArray<OrderModel>>;
+  ordersError$: Observable<Error | string>;
 
-  constructor(private ordersService: OrdersService) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.orders$ = this.ordersService.getOrders();
+    this.orders$ = this.store.pipe(select(getOrdersData));
+    this.ordersError$ = this.store.pipe(select(getOrdersError));
+
+    this.store.dispatch(new OrdersActions.GetOrders());
   }
 
 }

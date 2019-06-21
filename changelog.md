@@ -40,3 +40,7 @@
 * use HttpClient in ProductsService (Promise/Observable)
 * add `core/interceptors/TimingInterceptor`
 * add `core/services/AppSettingsService` (usage example in `layout/components/AboutComponent`)
+
+## Task 7
+* add `@ngrx` for orders (usage in `admin/ManageOrdersComponent`)
+* add `@ngrx`, `@ngrx/entity`, `@ngrx/router-store` for products (usage in `admin/ManageProductsComponent`)
