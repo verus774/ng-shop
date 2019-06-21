@@ -1,6 +1,8 @@
 <h3>Orders</h3>
 
-<div *ngFor="let order of (ordersState$ | async).data; let i = index">
+<p *ngIf="(ordersError$ | async) as value">{{value.message || value}}</p>
+
+<div *ngFor="let order of orders$ | async; let i = index">
   <table>
     <thead>
     <tr>
