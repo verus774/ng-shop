@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+
 
 import {ProductModel} from '../../../products/models/product.model';
 import {ProductsService} from '../../../products/services/products.service';
-import {pluck} from 'rxjs/operators';
+import {AppState, getSelectedProductByUrl} from '../../../core/+store';
+import * as RouterActions from './../../../core/+store/router/router.actions';
 
 @Component({
   selector: 'app-product-form',
@@ -13,17 +16,18 @@ import {pluck} from 'rxjs/operators';
 export class ProductFormComponent implements OnInit {
   product: ProductModel;
 
+  private sub: Subscription;
+
   constructor(
+    private store: Store<AppState>,
     private productsService: ProductsService,
-    private router: Router,
-    private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
-    this.route.data.pipe(pluck('product')).subscribe((product: ProductModel) => {
-      this.product = {...product};
-    });
+    this.sub = this.store
+      .pipe(select(getSelectedProductByUrl))
+      .subscribe(product => this.product = product);
   }
 
   onSaveProduct() {
@@ -36,6 +40,9 @@ export class ProductFormComponent implements OnInit {
   }
 
   onGoBack(): void {
-    this.router.navigate(['admin/products']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/admin/products']
+    }));
+
   }
 }
