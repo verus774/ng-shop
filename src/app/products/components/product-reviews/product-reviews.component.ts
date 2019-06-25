@@ -17,6 +17,7 @@ export class ProductReviewsComponent implements OnInit {
 
   ngOnInit() {
     const id = +this.route.parent.snapshot.paramMap.get('productID');
+    // без отписки?
     this.productsService.getProduct(id)
       .subscribe(product => this.product = product);
   }

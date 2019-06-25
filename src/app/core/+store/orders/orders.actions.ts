@@ -3,6 +3,7 @@ import {Action} from '@ngrx/store';
 import {OrderModel} from '../../../orders/models/order.model';
 
 export enum OrdersActionTypes {
+  // так много типов и мало классов ниже?
   GET_ORDERS = '[Orders] GET_ORDERS',
   GET_ORDERS_SUCCESS = '[Orders] GET_ORDERS_SUCCESS',
   GET_ORDERS_ERROR = '[Orders] GET_ORDERS_ERROR',

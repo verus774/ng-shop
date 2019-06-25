@@ -25,6 +25,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    // стоит добавить отписку
     this.sub = this.store
       .pipe(select(getSelectedProductByUrl))
       .subscribe(product => this.product = product);
