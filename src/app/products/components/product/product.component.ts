@@ -1,12 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 
-import { ProductModel } from '../../models/product.model';
+import {ProductModel} from '../../models/product.model';
+import {IProductQuantity} from '../../models/iproduct-quantity.model';
 
 @Component({
   selector: 'app-product',
@@ -16,16 +11,12 @@ import { ProductModel } from '../../models/product.model';
 })
 export class ProductComponent {
   @Input() product: ProductModel;
-  // Тип {product: ProductModel, quantity: number} - ок, но можно оформить как интерфейс
-  @Output() private buyProduct = new EventEmitter<{
-    product: ProductModel;
-    quantity: number;
-  }>();
+  @Output() private buyProduct = new EventEmitter<IProductQuantity>();
 
   quantity = 1;
 
   onBuyProduct(product: ProductModel, quantity: number): void {
-    this.buyProduct.emit({ product, quantity });
+    this.buyProduct.emit({product, quantity});
     this.quantity = 1;
   }
 }

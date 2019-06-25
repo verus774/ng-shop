@@ -1,46 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { CartService } from '../../../cart/services/cart.service';
-import { CartItemModel } from '../../../cart/models/cart-item.model';
-import { OrdersService } from '../../services/orders.service';
-import { OrderModel } from '../../models/order.model';
-import { Router } from '@angular/router';
+import {Subscription} from 'rxjs';
+import {first} from 'rxjs/operators';
+
+import {CartService} from '../../../cart/services/cart.service';
+import {CartItemModel} from '../../../cart/models/cart-item.model';
+import {OrdersService} from '../../services/orders.service';
+import {OrderModel} from '../../models/order.model';
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.css']
 })
-export class OrderListComponent implements OnInit {
+export class OrderListComponent implements OnInit, OnDestroy {
   items: CartItemModel[] = [];
   sum = 0;
   quantity = 0;
 
-  // Можно немного оптимизировать количество свойств, если
-  // 1. использовать массив или
-  // 2. использовать объект
-  // 3. использовать api Subscription, а именно метод this.sub.add(anotherSub)
-  private cartItemsSub: Subscription;
-  private sumSub: Subscription;
-  private quantitySub: Subscription;
+  private sub: Subscription;
 
   constructor(
     private cartService: CartService,
     private ordersService: OrdersService,
-    private router: Router
-  ) {}
+    private router: Router,
+  ) {
+  }
 
   ngOnInit() {
-    // желательно отписку сделать, например если использовать api subscription,
-    // то this.sub.unsubscribe отпишеться от всех подписок
-    this.cartItemsSub = this.cartService
+    this.sub = this.cartService
       .getItems()
       .subscribe(items => (this.items = items));
-    this.sumSub = this.cartService.getSum().subscribe(sum => (this.sum = sum));
-    this.quantitySub = this.cartService
+
+    const sumSub = this.cartService.getSum().subscribe(sum => (this.sum = sum));
+
+    const quantitySub = this.cartService
       .getQuantity()
       .subscribe(quantity => (this.quantity = quantity));
+
+    this.sub.add(sumSub);
+    this.sub.add(quantitySub);
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   onMakeOrder() {
@@ -51,10 +54,9 @@ export class OrderListComponent implements OnInit {
           this.items,
           this.sum,
           this.quantity
-          // тут, возможно стоит воспользоваться .pipe(first()).subscribe(...)
-          // чтобы закрыть поток, иначе надо как-то управлять подпиской
         )
       )
+      .pipe(first())
       .subscribe(() => {
         this.cartService.clearCart();
         this.router.navigate(['products-list']);

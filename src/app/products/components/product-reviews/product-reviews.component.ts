@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+
+import {Subscription} from 'rxjs';
 
 import {ProductsService} from '../../services/products.service';
 import {ProductModel} from '../../models/product.model';
@@ -9,17 +11,21 @@ import {ProductModel} from '../../models/product.model';
   templateUrl: './product-reviews.component.html',
   styleUrls: ['./product-reviews.component.css']
 })
-export class ProductReviewsComponent implements OnInit {
+export class ProductReviewsComponent implements OnInit, OnDestroy {
   product: ProductModel;
+  private sub: Subscription;
 
   constructor(private route: ActivatedRoute, private productsService: ProductsService) {
   }
 
   ngOnInit() {
     const id = +this.route.parent.snapshot.paramMap.get('productID');
-    // без отписки?
     this.productsService.getProduct(id)
       .subscribe(product => this.product = product);
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

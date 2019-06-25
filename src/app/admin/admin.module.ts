@@ -19,8 +19,6 @@ import {ProductResolveGuard} from './guards/product-resolve.guard';
     ManageOrdersComponent,
     ProductFormComponent,
     AdminComponent,
-    // задублированный компонент?
-    // ManageOrdersComponent,
   ],
   providers: [
     ProductResolveGuard,
