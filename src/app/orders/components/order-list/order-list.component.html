@@ -21,4 +21,5 @@
 
 <p>Total sum: {{ sum }}</p>
 <p>Total quantity: {{ quantity }}</p>
-<button (click)="onMakeOrder()">Make order</button>
+
+<app-process-order (makeOrder)="onMakeOrder($event)"></app-process-order>

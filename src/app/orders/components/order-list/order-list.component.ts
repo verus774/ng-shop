@@ -8,6 +8,7 @@ import {CartService} from '../../../cart/services/cart.service';
 import {CartItemModel} from '../../../cart/models/cart-item.model';
 import {OrdersService} from '../../services/orders.service';
 import {OrderModel} from '../../models/order.model';
+import {OrderFormModel} from '../../models/order-form.model';
 
 @Component({
   selector: 'app-order-list',
@@ -42,24 +43,24 @@ export class OrderListComponent implements OnInit, OnDestroy {
     this.sub.add(sumSub);
     this.sub.add(quantitySub);
   }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  onMakeOrder() {
-    this.ordersService
-      .addOrder(
-        new OrderModel(
-          undefined,
-          this.items,
-          this.sum,
-          this.quantity
-        )
-      )
+  onMakeOrder(formData: OrderFormModel) {
+    this.ordersService.addOrder(new OrderModel(
+      undefined,
+      this.items,
+      this.sum,
+      this.quantity,
+      formData,
+    ))
       .pipe(first())
       .subscribe(() => {
-        this.cartService.clearCart();
-        this.router.navigate(['products-list']);
-      });
+      this.cartService.clearCart();
+      this.router.navigate(['products-list']);
+    });
+
   }
 }

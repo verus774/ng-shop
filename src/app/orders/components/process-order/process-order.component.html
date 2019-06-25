@@ -1,0 +1,103 @@
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+
+  <p [ngClass]="{'has-error': (orderForm.get('firstName').touched ||
+                        orderForm.get('firstName').dirty) && orderForm.get('firstName').invalid }">
+    <label>First Name
+      <input type="text"
+             placeholder="First Name (required)"
+             autocomplete="off"
+             formControlName="firstName">
+    </label>
+    <span class="help-block" *ngIf="(orderForm.get('firstName').touched || orderForm.get('firstName').dirty) && orderForm.get('firstName').errors">
+      <span *ngIf="orderForm.get('firstName').hasError('required')">Please enter your first name.</span>
+      <span *ngIf="orderForm.get('firstName').hasError('minlength')">The first name must be longer than 3 characters.</span>
+    </span>
+  </p>
+
+  <p [ngClass]="{'has-error': (orderForm.get('lastName').touched ||
+                        orderForm.get('lastName').dirty) && orderForm.get('lastName').invalid }">
+    <label>Last Name
+      <input type="text"
+             placeholder="Last Name (required)"
+             autocomplete="off"
+             formControlName="lastName"
+      >
+    </label>
+    <span class="help-block" *ngIf="(orderForm.get('lastName').touched || orderForm.get('lastName').dirty) && orderForm.get('lastName').errors">
+      <span *ngIf="orderForm.get('lastName').hasError('required')">Please enter your last name.</span>
+      <span *ngIf="orderForm.get('lastName').hasError('minlength')">The last name must be longer than 3 characters.</span>
+    </span>
+  </p>
+
+  <div formGroupName="emailGroup" [ngClass]="{'has-error': orderForm.get('emailGroup').errors}">
+    <p [ngClass]="{'has-error': validationMessage}">
+      <label>Email
+        <input type="email"
+               placeholder="Email (required)"
+               formControlName="email"
+               (blur)="onBlur()"
+        >
+      </label>
+      <span class="help-block" *ngIf="validationMessage">{{ validationMessage }}</span>
+    </p>
+
+    <p>
+      <label>Confirm Email
+        <input type="email"
+               placeholder="Confirm Email (required)"
+               formControlName="confirmEmail"
+        >
+      </label>
+      <span class="help-block" *ngIf="(orderForm.get('emailGroup.confirmEmail').touched || orderForm.get('emailGroup.confirmEmail').dirty) && (orderForm.get('emailGroup.confirmEmail').errors || orderForm.get('emailGroup').errors)">
+          <span *ngIf="orderForm.get('emailGroup.confirmEmail').hasError('required')">Please confirm your email address.</span>
+          <span *ngIf="orderForm.get('emailGroup').hasError('emailMatch')">The confirmation does not match the email address.</span>
+      </span>
+    </p>
+  </div>
+
+  <div formArrayName="phones">
+    <p *ngFor="let address of phones.controls; let i = index" [ngClass]="{'has-error':
+    (orderForm.get(['phones', i]).touched || orderForm.get(['phones', i]).dirty) && orderForm.get(['phones', i]).invalid }">
+      <label>Phone #{{ i + 1 }}
+        <input type="tel"
+               placeholder="Phone (required)"
+               [formControlName]="i"
+        >
+      </label>
+      <button type="button" *ngIf="phones.controls.length > 1" (click)="onRemovePhone(i)">X</button>
+      <span class="help-block" *ngIf="(orderForm.get(['phones', i]).touched || orderForm.get(['phones', i]).dirty) && orderForm.get(['phones', i]).errors">
+          <span *ngIf="orderForm.get(['phones', i]).hasError('required')">Please enter your phone.</span>
+          <span *ngIf="orderForm.get(['phones', i]).hasError('minlength')">The phone number must be longer than 3 digits.</span>
+          <span *ngIf="orderForm.get(['phones', i]).hasError('pattern')">Please use digits.</span>
+      </span>
+    </p>
+
+    <p>
+      <button type="button" (click)="onAddPhone()">Add phone</button>
+    </p>
+  </div>
+
+  <p>
+    <label>
+      <input type="checkbox" formControlName="sendProducts">
+      Send products
+    </label>
+  </p>
+
+  <p *ngIf="orderForm.get('sendProducts').value" [ngClass]="{'has-error': (orderForm.get('address').touched ||
+                        orderForm.get('address').dirty) && orderForm.get('address').invalid }">
+    <label>Address
+      <input type="text"
+             placeholder="Address (required)"
+             formControlName="address"
+      >
+    </label>
+    <span class="help-block" *ngIf="(orderForm.get('address').touched || orderForm.get('address').dirty) && orderForm.get('address').errors">
+      <span *ngIf="orderForm.get('address').hasError('required')">Please enter your address.</span>
+      <span *ngIf="orderForm.get('address').hasError('minlength')">The address must be longer than 3 characters.</span>
+    </span>
+  </p>
+
+  <button [disabled]="orderForm.invalid" type="submit">Make order</button>
+
+</form>

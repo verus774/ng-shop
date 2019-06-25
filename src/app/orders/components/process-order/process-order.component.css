@@ -1,0 +1,11 @@
+.has-error input {
+  border: 1px solid red;
+  outline-color: red;
+}
+
+.help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: red;
+}

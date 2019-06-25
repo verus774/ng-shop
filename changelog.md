@@ -44,3 +44,11 @@
 ## Task 7
 * add `@ngrx` for orders (usage in `admin/ManageOrdersComponent`)
 * add `@ngrx`, `@ngrx/entity`, `@ngrx/router-store` for products (usage in `admin/ManageProductsComponent`)
+
+## Task 8
+* add `orders/ProcessOrderComponent` with reactive form
+* use builtin validators
+* add custom `emailMatcher` validator (`orders/validators`)
+* add/remove `phone` input field
+* add validation messages
+* get `eamil` validation messages from component class
