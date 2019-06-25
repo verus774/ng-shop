@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+
 import {Subscription} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
@@ -13,7 +14,7 @@ import * as RouterActions from './../../../core/+store/router/router.actions';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
   product: ProductModel;
 
   private sub: Subscription;
@@ -28,6 +29,10 @@ export class ProductFormComponent implements OnInit {
     this.sub = this.store
       .pipe(select(getSelectedProductByUrl))
       .subscribe(product => this.product = product);
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   onSaveProduct() {

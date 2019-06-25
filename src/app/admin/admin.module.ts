@@ -19,7 +19,6 @@ import {ProductResolveGuard} from './guards/product-resolve.guard';
     ManageOrdersComponent,
     ProductFormComponent,
     AdminComponent,
-    ManageOrdersComponent,
   ],
   providers: [
     ProductResolveGuard,
