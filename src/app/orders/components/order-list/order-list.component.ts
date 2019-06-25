@@ -43,7 +43,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
     this.sub.add(sumSub);
     this.sub.add(quantitySub);
   }
-  
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
