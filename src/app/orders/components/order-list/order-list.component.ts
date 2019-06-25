@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+
 import {Subscription} from 'rxjs';
 
 import {CartService} from '../../../cart/services/cart.service';
 import {CartItemModel} from '../../../cart/models/cart-item.model';
 import {OrdersService} from '../../services/orders.service';
 import {OrderModel} from '../../models/order.model';
-import {Router} from '@angular/router';
+import {OrderFormModel} from '../../models/order-form.model';
 
 @Component({
   selector: 'app-order-list',
@@ -34,12 +36,13 @@ export class OrderListComponent implements OnInit {
     this.quantitySub = this.cartService.getQuantity().subscribe(quantity => this.quantity = quantity);
   }
 
-  onMakeOrder() {
+  onMakeOrder(formData: OrderFormModel) {
     this.ordersService.addOrder(new OrderModel(
       undefined,
       this.items,
       this.sum,
       this.quantity,
+      formData,
     )).subscribe(() => {
       this.cartService.clearCart();
       this.router.navigate(['products-list']);

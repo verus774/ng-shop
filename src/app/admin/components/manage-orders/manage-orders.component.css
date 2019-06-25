@@ -1,0 +1,3 @@
+div > p:last-child {
+  margin-bottom: 30px;
+}

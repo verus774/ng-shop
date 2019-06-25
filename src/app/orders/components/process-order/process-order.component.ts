@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Subscription} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 import {CustomValidators} from '../../validators/custom.validators';
-import {debounceTime} from 'rxjs/operators';
+import {OrderFormModel} from '../../models/order-form.model';
 
 @Component({
   selector: 'app-process-order',
@@ -12,6 +13,8 @@ import {debounceTime} from 'rxjs/operators';
   styleUrls: ['./process-order.component.css']
 })
 export class ProcessOrderComponent implements OnInit, OnDestroy {
+  @Output() makeOrder = new EventEmitter<OrderFormModel>();
+
   orderForm: FormGroup;
   validationMessage: string;
 
@@ -36,6 +39,15 @@ export class ProcessOrderComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    const {firstName, lastName, emailGroup: {email}, phones, address} = this.orderForm.value;
+
+    this.makeOrder.emit(new OrderFormModel(
+      firstName,
+      lastName,
+      email,
+      phones,
+      address,
+    ));
   }
 
   onBlur() {

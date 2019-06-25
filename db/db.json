@@ -62,7 +62,14 @@
       ],
       "id": 1,
       "sum": 200,
-      "quantity": 2
+      "quantity": 2,
+      "formData": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "ddd@dd.dd",
+        "phones": ["33333"],
+        "address": "tttt"
+      }
     },
     {
       "products": [
@@ -99,7 +106,14 @@
       ],
       "id": 2,
       "sum": 500,
-      "quantity": 3
+      "quantity": 3,
+      "formData": {
+        "firstName": "Mike",
+        "lastName": "Doe",
+        "email": "eee@dd.dd",
+        "phones": ["33333", "4444"],
+        "address": "hhhhh"
+      }
     }
   ]
 }
