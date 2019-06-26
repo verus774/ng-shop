@@ -11,12 +11,23 @@ import {IProductQuantity} from '../../models/iproduct-quantity.model';
 })
 export class ProductComponent {
   @Input() product: ProductModel;
-  @Output() private buyProduct = new EventEmitter<IProductQuantity>();
+
+  @Output() buyProduct = new EventEmitter<IProductQuantity>();
+  @Output() goDetails = new EventEmitter<ProductModel>();
 
   quantity = 1;
 
   onBuyProduct(product: ProductModel, quantity: number): void {
     this.buyProduct.emit({product, quantity});
     this.quantity = 1;
+  }
+
+  onQuantityChange(evt: any): void {
+    this.quantity = parseInt(evt.target.value, 10);
+  }
+
+  onGoDetailsClick(evt: Event, product: ProductModel): void {
+    evt.preventDefault();
+    this.goDetails.emit(product);
   }
 }
