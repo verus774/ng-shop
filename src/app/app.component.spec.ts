@@ -1,33 +1,50 @@
-/*
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
+import {By} from '@angular/platform-browser';
+
+import {AppComponent} from './app.component';
+import {RouterLinkStubDirective} from './testing-helpers';
+
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  let fixture: ComponentFixture<AppComponent>;
+  let links: RouterLinkStubDirective[];
+  let linkDes: DebugElement[];
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  }));
+      declarations: [AppComponent, RouterLinkStubDirective],
+      schemas: [NO_ERRORS_SCHEMA]
+    });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'shop'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('shop');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to shop!');
+
+    linkDes = fixture.debugElement.queryAll(
+      By.directive(RouterLinkStubDirective)
+    );
+
+    links = linkDes.map(
+      d => d.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective
+    );
   });
+
+  it('can get RouterLinks from template', () => {
+    expect(links.length).toBe(5);
+    expect(links[0].linkParams).toBe('/');
+    expect(links[1].linkParams).toBe('/products-list');
+  });
+
+  it('can click Products link in template', () => {
+    const productsLinkDe = linkDes[1];
+    const productsLink = links[1];
+
+    expect(productsLink.navigatedTo).toBeNull();
+
+    productsLinkDe.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(productsLink.navigatedTo).toBe('/products-list');
+  });
+
 });
-*/
