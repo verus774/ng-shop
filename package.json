@@ -6,6 +6,7 @@
     "start": "concurrently --kill-others \"ng serve -o\" \"json-server --watch db\\db.json\"",
     "build": "ng build",
     "test": "ng test",
+    "test:coverage": "ng test --watch=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

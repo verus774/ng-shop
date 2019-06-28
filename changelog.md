@@ -52,3 +52,11 @@
 * add/remove `phone` input field
 * add validation messages
 * get `eamil` validation messages from component class
+
+## Task 9
+* add integrated unit tests for `ProductComponent`, `ProductListComponent`, `ColorizeDirective`
+* add integrated unit tests for `ProductsService`
+* add isolated unit tests for `LocalStorageService`
+* add isolated unit tests for `OrderByPipe`
+* add shallow unit tests for `AppComponent`
+* add npm command for generating test coverage

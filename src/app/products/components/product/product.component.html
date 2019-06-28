@@ -14,12 +14,12 @@
 
   <div class="buy-controls">
     <label for="quantity">Quantity</label>
-    <input id="quantity" type="number" [(ngModel)]="quantity">
+    <input id="quantity" type="number" [value]="quantity" (change)="onQuantityChange($event)">
     <button [disabled]="!product.isAvailable" (click)="onBuyProduct(product, quantity)" class="buy-btn">Buy</button>
   </div>
 
   <p class="details">
     <i>Updated: {{ product.updated | date:'dd.MM.yyyy' }}</i>
-    <a [routerLink]="['/product', product.id]">Details</a>
+    <a href="" (click)="onGoDetailsClick($event, product)">Details</a>
   </p>
 </div>
