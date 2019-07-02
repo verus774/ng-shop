@@ -25,6 +25,7 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    // а где же создается подписка? В коде выше ее надо сохранить.
     this.sub.unsubscribe();
   }
 
