@@ -20,7 +20,7 @@ export class ProductReviewsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const id = +this.route.parent.snapshot.paramMap.get('productID');
-    this.productsService.getProduct(id)
+    this.sub = this.productsService.getProduct(id)
       .subscribe(product => this.product = product);
   }
 
